@@ -1,0 +1,259 @@
+/* ── Reset & base ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Semantic palette vars — set by JS via applyPalette() */
+  --bg:      #212529;
+  --surface: #343a40;
+  --border:  #495057;
+  --muted:   #6c757d;
+  --text:    #ced4da;
+  --heading: #f8f9fa;
+  --accent:  #adb5bd;
+
+  /* Typography */
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body { min-height: 100svh; }
+
+/* ── Layout ───────────────────────────────────────────────────────────── */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+.site-header {
+  padding-top: var(--space-7);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.wordmark {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--heading);
+
+  em {
+    font-style: normal;
+    color: var(--muted);
+    margin: 0 1px;
+  }
+}
+
+.wordmark-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.header-rule {
+  height: 1px;
+  background: var(--border);
+  width: 100%;
+}
+
+/* ── Main ─────────────────────────────────────────────────────────────── */
+.main {
+  flex: 1;
+  padding: var(--space-8) 0 var(--space-9);
+}
+
+/* ── Hero block ───────────────────────────────────────────────────────── */
+.hero-block {
+  margin-bottom: var(--space-7);
+}
+
+.hero-title {
+  font-family: var(--font-mono);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--heading);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ── Tool grid ────────────────────────────────────────────────────────── */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+/* ── Tool card ────────────────────────────────────────────────────────── */
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--bg);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: background 0.15s ease;
+
+  &:hover:not(.tool-card--disabled):not(.tool-card--placeholder) {
+    background: var(--surface);
+
+    .tool-card__arrow {
+      transform: translateX(4px);
+      color: var(--heading);
+    }
+  }
+}
+
+.tool-card--disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.tool-card--placeholder {
+  cursor: default;
+  border: 1px dashed var(--border);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.placeholder-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--border);
+}
+
+.tool-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: space-between;
+}
+
+.tool-card__label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--heading);
+  letter-spacing: 0.02em;
+}
+
+.tool-card__desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.tool-card__arrow {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--border);
+  transition: transform 0.15s ease, color 0.15s ease;
+  align-self: flex-end;
+}
+
+/* ── Badges ───────────────────────────────────────────────────────────── */
+.badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.badge--live {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.badge--wip {
+  background: color-mix(in srgb, #d4a843 10%, transparent);
+  color: #d4a843;
+  border: 1px solid color-mix(in srgb, #d4a843 25%, transparent);
+}
+
+.badge--planned {
+  background: transparent;
+  color: var(--border);
+  border: 1px solid var(--border);
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-5) 0;
+}
+
+.footer-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--border);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+}
