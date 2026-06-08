@@ -9,7 +9,6 @@ import { lightSteel } from '../palettes/light-steel';
 import { applyPalette } from '../palettes/apply';
 import { parsePunchList, type ParseResult } from './parser';
 import { buildImageZip } from './zipper';
-import { debugExtract } from './debug-extract';
 
 applyPalette(lightSteel, true);
 
@@ -115,9 +114,6 @@ async function processFile(file: File): Promise<void> {
   zipBtn.hidden = true;
   results.hidden = true;
   setStatus('Reading PDF…');
-
-  // DEBUG — remove after tuning parser
-  await debugExtract(file);
 
   try {
     const result = await parsePunchList(file);
