@@ -51,3 +51,4 @@ Icon?
 
 # Local dev
 *.local
+.DS_Store

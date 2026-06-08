@@ -174,16 +174,21 @@ export async function parsePunchList(file: File): Promise<ParseResult> {
 
   const totalInDoc = deduped.length;
 
-  // Filter to our subs
-  const ours = deduped
-    .filter(item => isOurSub(item.assignedTo))
-    .map((item, _i): PunchItem => ({
-      originalIndex: item.index,
-      description: item.description,
-      assignedTo: item.assignedTo,
-      pageNumber: item.page,
-      imageCount: 0, // populated by image extractor
-    }));
+  // DEBUG — log all items so we can see raw assignedTo values
+  console.group('All parsed items');
+  for (const item of deduped) {
+    console.log(`#${item.index} | assignedTo: "${item.assignedTo}" | desc: "${item.description.slice(0, 60)}"`);
+  }
+  console.groupEnd();
+
+  // DEBUG — return all items unfiltered so we can verify assignedTo values
+  const ours = deduped.map((item): PunchItem => ({
+    originalIndex: item.index,
+    description: `[${item.assignedTo}] ${item.description}`,
+    assignedTo: item.assignedTo,
+    pageNumber: item.page,
+    imageCount: 0,
+  }));
 
   return { items: ours, totalInDoc, pageCount };
 }
