@@ -34,7 +34,7 @@ function statusBadge(status: Tool['status']): string {
 }
 
 function renderCard(tool: Tool): string {
-  const href = tool.status === 'live' ? `/${tool.slug}/` : '#';
+  const href = tool.status === 'live' ? `/replace-me/${tool.slug}/` : '#';
   return `
     <a class="tool-card ${tool.status !== 'live' ? 'tool-card--disabled' : ''}" href="${href}">
       <div class="tool-card__header">

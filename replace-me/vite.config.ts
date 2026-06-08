@@ -9,6 +9,7 @@ export default defineConfig({
   server: {
     port: 5200,
     strictPort: true, // fail loudly if port is taken rather than silently drifting
+    allowedHosts: ['work.fail.academy'],
   },
   fmt: {},
   lint: { options: { typeAware: true, typeCheck: true } },
